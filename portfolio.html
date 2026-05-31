@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ashirvadhan — AI Researcher & Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #080b10;
+    --bg2: #0d1117;
+    --bg3: #161b22;
+    --bg4: #1c2330;
+    --border: #21262d;
+    --border2: #30363d;
+    --accent: #58a6ff;
+    --accent2: #3fb950;
+    --accent3: #f78166;
+    --accent4: #d2a8ff;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #484f58;
+    --yellow: #e3b341;
+    --teal: #39d3bb;
+    --font-head: 'Syne', sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-head);
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* GRID BACKGROUND */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(88,166,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(88,166,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* SCAN LINE */
+  body::after {
+    content: '';
+    position: fixed;
+    top: -100%;
+    left: 0;
+    right: 0;
+    height: 200%;
+    background: linear-gradient(transparent 50%, rgba(0,0,0,0.03) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 0;
+    animation: scanlines 8s linear infinite;
+  }
+  @keyframes scanlines { to { top: 0; } }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 0 2rem;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(8,11,16,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .nav-logo span { color: var(--text2); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 4rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent2);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent2);
+  }
+  .hero h1 {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 .name-first { color: var(--text); }
+  .hero h1 .name-last {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+    display: block;
+  }
+  .hero-sub {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--text2);
+    margin: 1.5rem 0 2.5rem;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+  .hero-sub .hi { color: var(--accent4); }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 3rem;
+  }
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 5px 12px;
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .badge:hover { border-color: var(--accent); color: var(--accent); }
+  .badge.active { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,0.08); }
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 24px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text2);
+    border-color: var(--border2);
+  }
+  .btn-ghost:hover { border-color: var(--text2); color: var(--text); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2rem;
+    left: 4rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-scroll::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--text3);
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+  @keyframes pulse-line { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* STAT ROW */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-left: 1px solid var(--border);
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .stat-item {
+    padding: 2rem 2.5rem;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stat-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text2);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION WRAPPER */
+  .section-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 5rem 4rem;
+  }
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+  }
+  .section-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+  }
+  .section-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* EXPERIENCE */
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { display: flex; flex-direction: column; gap: 6px; }
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent2);
+    letter-spacing: 0.08em;
+  }
+  .exp-org {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text2);
+    line-height: 1.5;
+  }
+  .exp-status {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    background: rgba(63,185,80,0.1);
+    color: var(--accent2);
+    border: 1px solid rgba(63,185,80,0.3);
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+    width: fit-content;
+  }
+  .exp-role {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+  .exp-desc {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    background: var(--bg3);
+    color: var(--text2);
+    border: 1px solid var(--border2);
+    letter-spacing: 0.05em;
+  }
+  .tag.blue { color: var(--accent); border-color: rgba(88,166,255,0.3); background: rgba(88,166,255,0.05); }
+  .tag.purple { color: var(--accent4); border-color: rgba(210,168,255,0.3); background: rgba(210,168,255,0.05); }
+  .tag.orange { color: var(--accent3); border-color: rgba(247,129,102,0.3); background: rgba(247,129,102,0.05); }
+  .tag.teal { color: var(--teal); border-color: rgba(57,211,187,0.3); background: rgba(57,211,187,0.05); }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .proj-card {
+    background: var(--bg);
+    padding: 2rem;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--card-accent, var(--accent));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .proj-card:hover { background: var(--bg2); }
+  .proj-card:hover::before { transform: scaleX(1); }
+  .proj-index {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .proj-conference {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+  }
+  .conf-cvpr { background: rgba(247,129,102,0.1); color: var(--accent3); border: 1px solid rgba(247,129,102,0.3); }
+  .conf-star { background: rgba(227,179,65,0.1); color: var(--yellow); border: 1px solid rgba(227,179,65,0.3); }
+  .proj-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+  .proj-desc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text2);
+    line-height: 1.9;
+    margin-bottom: 1.5rem;
+  }
+  .proj-metric {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    padding: 10px 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+  }
+  .metric-val {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent2);
+  }
+  .metric-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+  }
+  .proj-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 1.5rem; }
+  .proj-link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s;
+  }
+  .proj-link:hover { gap: 10px; }
+  .proj-card.featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    --card-accent: var(--accent4);
+  }
+  .proj-card.featured .proj-desc { font-size: 12px; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .skill-group {
+    background: var(--bg);
+    padding: 1.75rem;
+  }
+  .skill-group-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .skill-group-title::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--group-color, var(--accent));
+    display: block;
+    border-radius: 50%;
+  }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-pill {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--border2);
+    color: var(--text2);
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .skill-pill:hover { border-color: var(--group-color, var(--accent)); color: var(--text); }
+
+  /* ACHIEVEMENTS */
+  .ach-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .ach-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+  }
+  .ach-card::after {
+    content: attr(data-num);
+    position: absolute;
+    right: -10px;
+    top: -20px;
+    font-size: 80px;
+    font-weight: 800;
+    color: var(--border);
+    line-height: 1;
+    pointer-events: none;
+    font-family: var(--font-head);
+  }
+  .ach-icon {
+    font-family: var(--font-mono);
+    font-size: 20px;
+    margin-bottom: 1rem;
+  }
+  .ach-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .ach-desc {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .contact-heading {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .contact-heading em { font-style: normal; color: var(--accent); }
+  .contact-sub {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 12px; }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.2s;
+    background: var(--bg2);
+  }
+  .contact-link:hover { border-color: var(--accent); background: rgba(88,166,255,0.05); }
+  .contact-link-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .contact-link-icon {
+    font-family: var(--font-mono);
+    font-size: 16px;
+    width: 32px;
+    color: var(--text2);
+  }
+  .contact-link-label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+  .contact-link-val {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text2);
+  }
+  .contact-link-arr {
+    font-size: 14px;
+    color: var(--text3);
+    transition: all 0.2s;
+  }
+  .contact-link:hover .contact-link-arr {
+    color: var(--accent);
+    transform: translateX(4px);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .footer-copy {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+  .footer-copy span { color: var(--accent2); }
+
+  /* CURSOR BLINK */
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* FADE IN ANIMATION */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s ease forwards;
+  }
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+  .delay-5 { animation-delay: 0.5s; }
+  .delay-6 { animation-delay: 0.6s; }
+
+  /* TERMINAL BLOCK */
+  .terminal {
+    background: var(--bg2);
+    border: 1px solid var(--border2);
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 2;
+  }
+  .term-prompt { color: var(--accent2); }
+  .term-cmd { color: var(--text); }
+  .term-out { color: var(--text2); }
+  .term-hi { color: var(--accent); }
+  .term-hi2 { color: var(--accent4); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .hero { padding: 5rem 1.5rem 4rem; }
+    .hero-scroll { left: 1.5rem; }
+    .section-wrap { padding: 4rem 1.5rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 1rem; }
+    .proj-card.featured { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    .stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo"><span>~/</span>ashirvadhan</div>
+  <div class="nav-links">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-tag fade-in">Research Intern @ IIT Bhilai · Available for Internships</p>
+  <h1 class="fade-in delay-1">
+    <span class="name-first">Dosapati</span>
+    <span class="name-last">Ashirvadhan<span class="cursor"></span></span>
+  </h1>
+  <p class="hero-sub fade-in delay-2">
+    <span class="hi">// </span>B.Tech Data Science & AI @ IIT Bhilai.<br/>
+    Building industrial VLM benchmarks, edge-deployable deepfake detectors,<br/>
+    and adaptive learning systems. Targeting CVPR 2026.
+  </p>
+  <div class="hero-badges fade-in delay-3">
+    <span class="badge active">Vision-Language Models</span>
+    <span class="badge">Computer Vision</span>
+    <span class="badge">Multimodal AI</span>
+    <span class="badge">Edge Deployment</span>
+    <span class="badge">Deep Learning</span>
+    <span class="badge">Full-Stack ML</span>
+  </div>
+  <div class="hero-cta fade-in delay-4">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+  <div class="hero-scroll fade-in delay-5">Scroll to explore</div>
+</section>
+
+<!-- STATS -->
+<div class="stat-row">
+  <div class="stat-item fade-in">
+    <div class="stat-num">~95%</div>
+    <div class="stat-label">Deepfake Detection Accuracy</div>
+  </div>
+  <div class="stat-item fade-in delay-1">
+    <div class="stat-num">50%</div>
+    <div class="stat-label">SMAPE Reduction · Amazon ML</div>
+  </div>
+  <div class="stat-item fade-in delay-2">
+    <div class="stat-num">A*</div>
+    <div class="stat-label">Target Conference · VLM Benchmark</div>
+  </div>
+  <div class="stat-item fade-in delay-3">
+    <div class="stat-num">2026</div>
+    <div class="stat-label">CVPR Submission Target</div>
+  </div>
+</div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Experience</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <span class="exp-date">JAN 2025 — PRESENT</span>
+        <span class="exp-org">IIT Bhilai ×<br/>Industrial AI Research<br/>Steel Manufacturing Plant</span>
+        <span class="exp-status">● ACTIVE</span>
+      </div>
+      <div>
+        <h3 class="exp-role">Research Intern — Vision-Language Model Benchmarking</h3>
+        <p class="exp-desc">
+          Developing a novel real-world industrial benchmark dataset from live steel plant CCTV footage,
+          targeting A* ML/AI conference submission. Designed an automated video segmentation pipeline using
+          VLMs to parse raw footage into structured 15-second annotated clips. Created a multi-layer
+          annotation framework covering PPE compliance, action classification, spatial context, and group
+          activity reasoning. Collaborating directly with domain experts to ensure deployment alignment
+          and dataset authenticity.
+        </p>
+        <div class="exp-tags">
+          <span class="tag blue">Vision-Language Models</span>
+          <span class="tag blue">Video Segmentation</span>
+          <span class="tag purple">Benchmark Dataset</span>
+          <span class="tag teal">Industrial AI</span>
+          <span class="tag teal">PPE Compliance</span>
+          <span class="tag orange">A* Target</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-meta">
+        <span class="exp-date">2023 — PRESENT</span>
+        <span class="exp-org">IIT Bhilai<br/>Chhattisgarh, India</span>
+      </div>
+      <div>
+        <h3 class="exp-role">B.Tech — Data Science & Artificial Intelligence</h3>
+        <p class="exp-desc">
+          Class X: 10.0 CGPA · Class XII: 92% · Currently in 2nd year at one of India's
+          premier IITs. Coursework includes deep learning, computer vision, NLP, algorithms, and
+          data structures. Actively engaged in research beyond coursework.
+        </p>
+        <div class="exp-tags">
+          <span class="tag blue">IIT Bhilai</span>
+          <span class="tag">10.0 CGPA (X)</span>
+          <span class="tag">92% (XII)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- FEATURED -->
+      <div class="proj-card featured">
+        <div>
+          <div class="proj-index">
+            <span>PROJECT_001</span>
+            <span class="proj-conference conf-cvpr">CVPR 2026 TARGET</span>
+          </div>
+          <h3 class="proj-title">Deepfake Detection System<br/>Edge-Deployable CLIP Adapter</h3>
+          <p class="proj-desc">
+            Lightweight deepfake detection combining pre-trained CLIP embeddings with a residual adapter
+            module for task-specific feature refinement. Adapter modifies only the CLS token representation
+            (F'cls = Fcls + α · Adapter(Fcls)), preserving semantic structure while injecting detection-specific
+            corrections without full backbone retraining.
+          </p>
+          <div class="proj-stack">
+            <span class="tag blue">PyTorch</span>
+            <span class="tag blue">CLIP</span>
+            <span class="tag purple">ONNX</span>
+            <span class="tag purple">MobileVLM</span>
+            <span class="tag teal">BLIP</span>
+            <span class="tag">Python</span>
+          </div>
+          <a href="https://github.com/Prabhu0305/Deepfake_app" class="proj-link" target="_blank">
+            View on GitHub →
+          </a>
+        </div>
+        <div>
+          <div class="proj-metric" style="--card-accent:var(--accent4)">
+            <div>
+              <div class="metric-val">~95%</div>
+              <div class="metric-label">Accuracy across GAN + Diffusion images</div>
+            </div>
+          </div>
+          <div class="proj-metric">
+            <div>
+              <div class="metric-val">2×</div>
+              <div class="metric-label">Deployment pipelines — ONNX mobile + MobileVLM</div>
+            </div>
+          </div>
+          <div class="terminal">
+            <div><span class="term-prompt">$ </span><span class="term-cmd">python detect.py --input video.mp4</span></div>
+            <div><span class="term-out">Loading CLIP adapter weights...</span></div>
+            <div><span class="term-out">Running CLS token residual correction...</span></div>
+            <div><span class="term-out">Prediction: </span><span class="term-hi">DEEPFAKE</span><span class="term-out"> [confidence: </span><span class="term-hi2">0.9731</span><span class="term-out">]</span></div>
+            <div><span class="term-out">Inference time: </span><span class="term-hi">18ms</span><span class="term-out"> (edge-optimized)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROJECT 2 -->
+      <div class="proj-card" style="--card-accent: var(--accent2)">
+        <div class="proj-index">
+          <span>PROJECT_002</span>
+          <span class="proj-conference conf-star">A* TARGET</span>
+        </div>
+        <h3 class="proj-title">Industrial VLM Benchmark Dataset</h3>
+        <p class="proj-desc">
+          Novel real-world benchmark from live steel plant CCTV. Multi-layer annotation: per-person
+          action classification, PPE compliance, spatial context, group activity reasoning. Addresses
+          hard CV challenges — occlusion, low-light, dense scenes.
+        </p>
+        <div class="proj-metric">
+          <div>
+            <div class="metric-val">15s</div>
+            <div class="metric-label">Structured annotated clip units</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="tag blue">VLMs</span>
+          <span class="tag teal">Video Segmentation</span>
+          <span class="tag purple">Annotation Framework</span>
+          <span class="tag">CCTV Footage</span>
+        </div>
+      </div>
+
+      <!-- PROJECT 3 -->
+      <div class="proj-card" style="--card-accent: var(--accent4)">
+        <div class="proj-index">PROJECT_003</div>
+        <h3 class="proj-title">GATEWay — Intelligent GATE DA Platform</h3>
+        <p class="proj-desc">
+          Full-stack adaptive learning platform with graph-based question sequencing driven by ELO ratings,
+          weak topic clusters, and learning momentum. Predictive scoring model + teacher analytics dashboard
+          for real-time at-risk student identification.
+        </p>
+        <div class="proj-stack">
+          <span class="tag blue">React</span>
+          <span class="tag blue">FastAPI</span>
+          <span class="tag teal">Supabase</span>
+          <span class="tag purple">ELO Ratings</span>
+          <span class="tag">Python</span>
+        </div>
+        <br/>
+        <a href="https://github.com/Prabhu0305" class="proj-link" target="_blank">
+          View GitHub →
+        </a>
+      </div>
+
+      <!-- PROJECT 4 -->
+      <div class="proj-card" style="--card-accent: var(--yellow)">
+        <div class="proj-index">PROJECT_004</div>
+        <h3 class="proj-title">Amazon ML Hackathon — Vision Price Prediction</h3>
+        <p class="proj-desc">
+          Multimodal pricing model combining ViT embeddings with structured product metadata.
+          LightGBM + MLP ensemble with feature fusion pipeline integrating image-derived and
+          tabular representations into a unified latent space.
+        </p>
+        <div class="proj-metric">
+          <div>
+            <div class="metric-val" style="color: var(--yellow)">50%</div>
+            <div class="metric-label">SMAPE reduction over baseline</div>
+          </div>
+        </div>
+        <div class="proj-stack">
+          <span class="tag">ViT</span>
+          <span class="tag blue">LightGBM</span>
+          <span class="tag purple">MLP Ensemble</span>
+          <span class="tag">Feature Fusion</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group" style="--group-color: var(--accent)">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">C++</span>
+          <span class="skill-pill">JavaScript</span>
+          <span class="skill-pill">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group" style="--group-color: var(--accent4)">
+        <div class="skill-group-title">ML / AI</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Transformers</span>
+          <span class="skill-pill">Vision-Language Models</span>
+          <span class="skill-pill">NLP</span>
+          <span class="skill-pill">Computer Vision</span>
+          <span class="skill-pill">Deep Learning</span>
+          <span class="skill-pill">NEAT</span>
+          <span class="skill-pill">Multimodal Learning</span>
+        </div>
+      </div>
+      <div class="skill-group" style="--group-color: var(--teal)">
+        <div class="skill-group-title">Frameworks</div>
+        <div class="skill-pills">
+          <span class="skill-pill">PyTorch</span>
+          <span class="skill-pill">Hugging Face</span>
+          <span class="skill-pill">FastAPI</span>
+          <span class="skill-pill">React</span>
+          <span class="skill-pill">ONNX</span>
+          <span class="skill-pill">MobileVLM</span>
+          <span class="skill-pill">BLIP</span>
+          <span class="skill-pill">Streamlit</span>
+        </div>
+      </div>
+      <div class="skill-group" style="--group-color: var(--accent3)">
+        <div class="skill-group-title">Systems & Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Docker</span>
+          <span class="skill-pill">Git</span>
+          <span class="skill-pill">Supabase</span>
+          <span class="skill-pill">Graph Systems</span>
+          <span class="skill-pill">Recommendation Engines</span>
+          <span class="skill-pill">Edge Deployment</span>
+          <span class="skill-pill">Prompt Engineering</span>
+          <span class="skill-pill">DSA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Achievements</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card" data-num="01">
+        <div class="ach-icon" style="color: var(--accent3)">⬡</div>
+        <h4 class="ach-title">Amazon ML Hackathon — Selected Participant</h4>
+        <p class="ach-desc">Multimodal ViT + LightGBM pricing solution achieved 50% SMAPE reduction over the competition baseline.</p>
+      </div>
+      <div class="ach-card" data-num="02">
+        <div class="ach-icon" style="color: var(--accent4)">⬡</div>
+        <h4 class="ach-title">CVPR 2026 Submission</h4>
+        <p class="ach-desc">Targeting CVPR 2026 for edge-deployable deepfake detection using CLIP adapters and MobileVLM multimodal pipelines.</p>
+      </div>
+      <div class="ach-card" data-num="03">
+        <div class="ach-icon" style="color: var(--yellow)">⬡</div>
+        <h4 class="ach-title">A* Conference Target</h4>
+        <p class="ach-desc">Building novel industrial VLM benchmark dataset from live factory footage — targeting top-tier A* ML/AI venue.</p>
+      </div>
+      <div class="ach-card" data-num="04">
+        <div class="ach-icon" style="color: var(--accent2)">⬡</div>
+        <h4 class="ach-title">Perfect Academic Foundation</h4>
+        <p class="ach-desc">10.0 CGPA in Class X and 92% in Class XII. Secured admission to IIT Bhilai's B.Tech Data Science & AI program.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-heading">Let's build<br/><em>something</em><br/>remarkable.</h2>
+        <p class="contact-sub">
+          Open to ML/AI research internships, collaborations on CV or<br/>
+          multimodal AI projects, and interesting conversations about<br/>
+          the frontier of vision-language models.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:dosapatia@iitbhilai.ac.in" class="contact-link">
+          <div class="contact-link-left">
+            <div class="contact-link-icon">@</div>
+            <div>
+              <div class="contact-link-label">Email</div>
+              <div class="contact-link-val">dosapatia@iitbhilai.ac.in</div>
+            </div>
+          </div>
+          <div class="contact-link-arr">→</div>
+        </a>
+        <a href="https://linkedin.com/in/ashirvadhan" target="_blank" class="contact-link">
+          <div class="contact-link-left">
+            <div class="contact-link-icon">in</div>
+            <div>
+              <div class="contact-link-label">LinkedIn</div>
+              <div class="contact-link-val">linkedin.com/in/ashirvadhan</div>
+            </div>
+          </div>
+          <div class="contact-link-arr">→</div>
+        </a>
+        <a href="https://github.com/Prabhu0305" target="_blank" class="contact-link">
+          <div class="contact-link-left">
+            <div class="contact-link-icon">&lt;/&gt;</div>
+            <div>
+              <div class="contact-link-label">GitHub</div>
+              <div class="contact-link-val">github.com/Prabhu0305</div>
+            </div>
+          </div>
+          <div class="contact-link-arr">→</div>
+        </a>
+        <div class="contact-link" style="cursor:default">
+          <div class="contact-link-left">
+            <div class="contact-link-icon">#</div>
+            <div>
+              <div class="contact-link-label">Phone</div>
+              <div class="contact-link-val">+91 8985834597</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-copy">© 2025 Dosapati Ashirvadhan · <span>IIT Bhilai</span></div>
+  <div class="footer-copy">Built with intention · Targeting <span>CVPR 2026</span></div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.exp-item, .proj-card, .skill-group, .ach-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
